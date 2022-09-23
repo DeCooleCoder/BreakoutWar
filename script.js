@@ -24,20 +24,36 @@ class Ball{
     }
 }
 
-var Ball1
+var Ball1;
 
-class Block{
-    constructor(){
-        
-    }
-}
+// class Block{
+//     constructor(){
+//         this.xpos = random(windowWidth);
+//         this.ypos = random(windowHeight);
+//     }
+    
+//     draw(){
+//         rect(this.xpos, this.ypos, 60, 30)
+//         fill('crimson')
+//     }
+// }
+
+// var blocks = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  Ball1 = new Ball(70,190,30,30,5,5,"crimson")
+  Ball1 = new Ball(70,190,30,30,5,5,"crimson");
+
+  // for(i = 0; i < 30; i++){
+  //   blocks.push(new Block());
+  // }
 }
 
 function draw() {
-    background('black')
-    Ball1.draw()
+    background('black');
+    Ball1.draw();
+    
+    // blocks.forEach(block => {
+    //  block.draw()
+    // });  
 }

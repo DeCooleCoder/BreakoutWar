@@ -2,7 +2,7 @@ let colorlist = ['white', 'black']
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(125);
+  background('gray');
 }
 
 function draw() {

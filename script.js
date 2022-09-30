@@ -1,3 +1,7 @@
+//Variablen!!
+var Player1, Player2
+
+//Classes!!!
 class player {
   constructor(x, y, w, h, c, r) {
     player.x = x;
@@ -10,21 +14,6 @@ class player {
   draw() {
     fill(this.color);
     rect(player.x, player.y, this.width, this.height, this.radius);
-  }
-}
-
-class player2 {
-  constructor(x, y, w, h, c, r) {
-    player.x2 = x;
-    player.y2 = y;
-    this.width = w;
-    this.height = h;
-    this.color = c;
-    this.radius = r;
-  }
-  draw() {
-    fill(this.color);
-    rect(player.x2, player.y2, this.width, this.height, this.radius);
   }
 }
 
@@ -65,19 +54,16 @@ class brick {
   }
 }
 
-var Player1, Player2
-
+//Functions!!
 function setup() {
   createCanvas(600, 400);
   Player1 = new player(250, 350, 100, 30, "lime", 10)
-  Player2 = new player2(250, 350, 100, 30, "purple", 10)
   Ball = new ball(300, 200, 25, 25, 5, 5, "crimson")
 }
 
 function draw() {
   background("#48cfd9");
   Player1.draw();
-  Player2.draw();
   Ball.draw();
 
   //speler 1
@@ -87,15 +73,6 @@ function draw() {
 
   if (keyIsDown(39)) {
     player.x = player.x + 5
-  }
-  
-  //speler 2
-  if (keyIsDown(65)) {
-    player.x2 = player.x2 - 5
-  }
-
- if (keyIsDown(68)) {
-    player.x2 = player.x2 + 5
   }
 }
 

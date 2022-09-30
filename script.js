@@ -12,7 +12,6 @@ class player{
    }
   }
 
-
 class ball{
   
   constructor( x, y, w, h, vx, vy, c){
@@ -40,8 +39,6 @@ class ball{
   }
 }
 
-var Ball1;
-
 class Platform{
     constructor(x,y,c){
         Platform.x = x;
@@ -59,30 +56,15 @@ class Platform{
     }
 }
 
+//Variables!!!
+var Ball1;
 var Platform1;
-
-
-
-
-// class Block{
-//     constructor(){
-//         this.xpos = random(windowWidth);
-//         this.ypos = random(windowHeight);
-//     }
-    
-//     draw(){
-//         rect(this.xpos, this.ypos, 60, 30)
-//         fill('crimson')
-//     }
-// }
-
-// var blocks = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   Ball1 = new Ball(windowWidth/2,windowHeight/2,30,30,5,5,"crimson");
   Platform1 = new Platform(windowWidth/2,windowHeight/2, "white");
-  // for(i = 0; i < 30; i++){
+  // for(getal = 0; getal < 30; getal += 1){
   //   blocks.push(new Block());
   // }
 }

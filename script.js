@@ -1,5 +1,7 @@
 //Variablen!!
-var Player1, Player2
+var Player1
+var Ball
+var Brick1, Brick2, Brick3, Brick4, Brick5 //Note to self probeer lijst vna te maken misschien? met append enzo
 
 //Classes!!!
 class player {
@@ -36,35 +38,52 @@ class ball {
     this.y = this.y + this.vy;
 
     //velocity code
-    if (this.x < -10 || this.x > width) {
+    if (this.x < 10 || this.x > width) {
       this.vx = this.vx * -1;
     }
-    if (this.y < -10 || this.y > height) {
+    if (this.y < 10 || this.y > height) {
       this.vy = this.vy * -1;
     }
   }
 }
 
 class brick {
-  constructor(x, y, w, h) {
+  constructor(x, y, c) {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.color = c;
+  }
+
+  draw(){
+    fill(this.color)
+    rect(this.x, this.y, 70, 20, 5)
   }
 }
 
 //Functions!!
 function setup() {
-  createCanvas(600, 400);
-  Player1 = new player(250, 350, 100, 30, "lime", 10)
+  createCanvas(600, 500);
+  Player1 = new player(250, 400, 100, 30, "lime", 10)
   Ball = new ball(300, 200, 25, 25, 5, 5, "crimson")
+  Brick1 = new brick(130, 50, "green")
+  Brick2 = new brick(200, 50, "green")
+  Brick3 = new brick(270, 50, "green")
+  Brick4 = new brick(340, 50, "green")
+  Brick5 = new brick(410, 50, "green")
 }
+
+function collision(){
+    }
 
 function draw() {
   background("#48cfd9");
   Player1.draw();
   Ball.draw();
+  Brick1.draw();
+  Brick2.draw();
+  Brick3.draw();
+  Brick4.draw();
+  Brick5.draw();
 
   //speler 1
   if (keyIsDown(37)) {
@@ -74,7 +93,15 @@ function draw() {
   if (keyIsDown(39)) {
     player.x = player.x + 5
   }
+  
+  if (player.x < 0){
+    player.x = 0;
+  }
+  if (player.x > 500){
+    player.x = 500;
+  }
 }
+
 
 // handige shortcuts!!!
 // ctlr + / shorcut voor een comment

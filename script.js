@@ -27,47 +27,25 @@ class Ball{
 var Ball1;
 
 class Platform{
-    constructor(x,y,vx,c){
+    constructor(x,y,c){
         Platform.x = x;
         Platform.y = y;
-        Platform.vx = vx;
         Platform.color = c;
     }
 
     draw(){
         fill(Platform.color);
         rect(Platform.x, Platform.y, 80, 20);
-        Platform.x = Platform.x + Platform.vx
+    }
+
+    hit(){
+              
     }
 }
 
 var Platform1;
 
-function keyPressed() {
-  switch (keyCode) {
-    case 37:
-    case 65:
-      Platform.vx = -5;
-      break;
-    case 39:
-    case 68:
-      Platform.vx = 5;
-      break;
-  }
-}
 
-function keyReleased() {
-  switch (keyCode) {
-    case 37:
-    case 65:
-      Platform.vx = 0;
-      break;
-    case 39:
-    case 68:
-      Platform.vx = 0;
-      break;
-  }
-}
 
 
 // class Block{
@@ -87,7 +65,7 @@ function keyReleased() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   Ball1 = new Ball(windowWidth/2,windowHeight/2,30,30,5,5,"crimson");
-  Platform1 = new Platform(windowWidth/2,windowHeight/2, 0,"white");
+  Platform1 = new Platform(windowWidth/2,windowHeight/2, "white");
   // for(i = 0; i < 30; i++){
   //   blocks.push(new Block());
   // }
@@ -97,10 +75,16 @@ function draw() {
     background('black');
     Platform1.draw();
     Ball1.draw();
-
-    
     
     // blocks.forEach(block => {
     //  block.draw()
-    // });  
+    // }); 
+
+    if (keyIsDown(37)){
+            Platform.x =  Platform.x - 5  
+        }
+
+        if (keyIsDown(39)){
+            Platform.x = Platform.x + 5
+        }  
 }

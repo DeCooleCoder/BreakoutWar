@@ -27,28 +27,48 @@ class Ball{
 var Ball1;
 
 class Platform{
-    constructor(a,b,c){
-        Platform.a = a;
-        Platform.b = b;
+    constructor(x,y,vx,c){
+        Platform.x = x;
+        Platform.y = y;
+        Platform.vx = vx;
         Platform.color = c;
     }
 
     draw(){
         fill(Platform.color);
-        rect(Platform.a, Platform.b, 80, 20);
-
-        if ((keyIsPressed == true) && (key === Right_Arrow)) {
-            Platform.a = Platform.a - 5
-            
-        }
-        if ((keyIsPressed == true) && (key === Left_Arrow)) {
-            Platform.a = Platform.a + 5
-            
-        }
+        rect(Platform.x, Platform.y, 80, 20);
+        Platform.x = Platform.x + Platform.vx
     }
 }
 
 var Platform1;
+
+function keyPressed() {
+  switch (keyCode) {
+    case 37:
+    case 65:
+      Platform.vx = -5;
+      break;
+    case 39:
+    case 68:
+      Platform.vx = 5;
+      break;
+  }
+}
+
+function keyReleased() {
+  switch (keyCode) {
+    case 37:
+    case 65:
+      Platform.vx = 0;
+      break;
+    case 39:
+    case 68:
+      Platform.vx = 0;
+      break;
+  }
+}
+
 
 // class Block{
 //     constructor(){
@@ -67,7 +87,7 @@ var Platform1;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   Ball1 = new Ball(windowWidth/2,windowHeight/2,30,30,5,5,"crimson");
-  Platform1 = new Platform(windowWidth/2,windowHeight/2,"white");
+  Platform1 = new Platform(windowWidth/2,windowHeight/2, 0,"white");
   // for(i = 0; i < 30; i++){
   //   blocks.push(new Block());
   // }

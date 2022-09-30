@@ -1,27 +1,43 @@
-class Ball{
-    constructor(x,y,w,h,vx,vy,c){
-        Ball.x = x;
-        Ball.y = y;
-        Ball.width = w;
-        Ball.height = h;
-        Ball.vx = vx;
-        Ball.vy = vy;
-        Ball.color = c;
-    }
+class player{
+  constructor( x, y, w, h, c){
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    this.color = c;
+  }
+  draw() {
+    fill(this.color);
+    rect(this.x, this.y, this.width, this.height);
+   }
+  }
 
-    draw(){
-        fill(Ball.color);
-        ellipse(Ball.x, Ball.y, Ball.width, Ball.height);
-        Ball.x = Ball.x + Ball.vx;
-        Ball.y = Ball.y + Ball.vy;
 
-        if(Ball.x < 0 || Ball.x > width){
-            Ball.vx = Ball.vx * -1
-        }
-        if(Ball.y < 0 || Ball.y > height){
-            Ball.vy = Ball.vy * -1
-        }
+class ball{
+  
+  constructor( x, y, w, h, vx, vy, c){
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    this.vx = vx;
+    this.vy = vy;
+    this.color = c;
+  }
+
+    draw() {
+      fill(this.color);
+    ellipse(this.x, this.y, this.width, this.height);
+    this.x = this.x + this.vx;
+    this.y = this.y + this.vy;
+
+    if(this.x < -10 || this.x > width){
+      this.vx = this.vx * -1;
     }
+    if(this.y < -10 || this.y > height){
+      this.vy = this.vy * -1;
+    }
+  }
 }
 
 var Ball1;

@@ -1,15 +1,30 @@
-//Classes!!!
 class player {
-  constructor(x, y, w, h, c) {
-    this.x = x;
-    this.y = y;
+  constructor(x, y, w, h, c, r) {
+    player.x = x;
+    player.y = y;
     this.width = w;
     this.height = h;
     this.color = c;
+    this.radius = r;
   }
   draw() {
     fill(this.color);
-    rect(this.x, this.y, this.width, this.height);
+    rect(player.x, player.y, this.width, this.height, this.radius);
+  }
+}
+
+class player2 {
+  constructor(x, y, w, h, c, r) {
+    player.x2 = x;
+    player.y2 = y;
+    this.width = w;
+    this.height = h;
+    this.color = c;
+    this.radius = r;
+  }
+  draw() {
+    fill(this.color);
+    rect(player.x2, player.y2, this.width, this.height, this.radius);
   }
 }
 
@@ -31,6 +46,7 @@ class ball {
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
+    //velocity code
     if (this.x < -10 || this.x > width) {
       this.vx = this.vx * -1;
     }
@@ -40,25 +56,8 @@ class ball {
   }
 }
 
-class Platform {
-  constructor(x, y, c) {
-    Platform.x = x;
-    Platform.y = y;
-    Platform.color = c;
-  }
-
-  draw() {
-    fill(Platform.color);
-    rect(Platform.x, Platform.y, 80, 20);
-  }
-
-  hit() {
-
-  }
-}
-
-class brick{
-  constructor( x, y, w, h){
+class brick {
+  constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -66,34 +65,44 @@ class brick{
   }
 }
 
-//Variables!!!
-var Ball1;
-var Platform1;
+var Player1, Player2
 
-//Functies!!!
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  Ball1 = new Ball(windowWidth / 2, windowHeight / 2, 30, 30, 5, 5, "crimson");
-  Platform1 = new Platform(windowWidth / 2, windowHeight / 2, "white");
-  // for(getal = 0; getal < 30; getal += 1){
-  //   blocks.push(new Block());
-  // }
+  createCanvas(600, 400);
+  Player1 = new player(250, 350, 100, 30, "lime", 10)
+  Player2 = new player2(250, 350, 100, 30, "purple", 10)
+  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson")
 }
 
 function draw() {
-  background('black');
-  Platform1.draw();
-  Ball1.draw();
+  background("#48cfd9");
+  Player1.draw();
+  Player2.draw();
+  Ball.draw();
 
-  // blocks.forEach(block => {
-  //  block.draw()
-  // }); 
-
+  //speler 1
   if (keyIsDown(37)) {
-    Platform.x = Platform.x - 5
+    player.x = player.x - 5
   }
 
   if (keyIsDown(39)) {
-    Platform.x = Platform.x + 5
+    player.x = player.x + 5
+  }
+  
+  //speler 2
+  if (keyIsDown(65)) {
+    player.x2 = player.x2 - 5
+  }
+
+ if (keyIsDown(68)) {
+    player.x2 = player.x2 + 5
   }
 }
+
+// handige shortcuts!!!
+// ctlr + / shorcut voor een comment
+// ctlr + alt ingedrukt houden om meerdere dingen tegelijkertijd te kunnen editten
+// ctlr + enter = een run shortcut
+// ctrl + f om dingen in je code te zoeken
+// ctrl + d is om alles wat hetzelfde is tegelijkertijd te kunnen veranderen
+// ctlr + z = een undo shortcut

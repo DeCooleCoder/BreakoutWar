@@ -59,11 +59,12 @@ class brick {
   }
 
   hit(){
-    if(Ball.x > this.x){
-      console.log("hit")
+    if(Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20){
+        background("black")
+        }
     }
-  }
 }
+    
 
 //Functions!!
 function setup() {
@@ -77,9 +78,6 @@ function setup() {
   bricks.push(new brick(340, 50, "green"));
   bricks.push(new brick(410, 50, "green"));
 }
-
-function collision(){
-    }
 
 function draw() {
   background("#48cfd9");

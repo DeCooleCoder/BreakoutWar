@@ -1,7 +1,7 @@
 //Variablen!!
-var Player1
-var Ball
-var Brick1, Brick2, Brick3, Brick4, Brick5 //Note to self probeer lijst vna te maken misschien? met append enzo
+var Player1;
+var Ball;
+var bricks = [];
 
 //Classes!!!
 class player {
@@ -20,7 +20,6 @@ class player {
 }
 
 class ball {
-
   constructor(x, y, w, h, vx, vy, c) {
     this.x = x;
     this.y = y;
@@ -58,18 +57,25 @@ class brick {
     fill(this.color)
     rect(this.x, this.y, 70, 20, 5)
   }
+
+  hit(){
+    if(Ball.x > this.x){
+      console.log("hit")
+    }
+  }
 }
 
 //Functions!!
 function setup() {
   createCanvas(600, 500);
-  Player1 = new player(250, 400, 100, 30, "lime", 10)
-  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson")
-  Brick1 = new brick(130, 50, "green")
-  Brick2 = new brick(200, 50, "green")
-  Brick3 = new brick(270, 50, "green")
-  Brick4 = new brick(340, 50, "green")
-  Brick5 = new brick(410, 50, "green")
+  Player1 = new player(250, 400, 100, 30, "lime", 10);
+  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson");
+
+  bricks.push(new brick(130, 50, "green"));
+  bricks.push(new brick(200, 50, "green"));
+  bricks.push(new brick(270, 50, "green"));
+  bricks.push(new brick(340, 50, "green"));
+  bricks.push(new brick(410, 50, "green"));
 }
 
 function collision(){
@@ -79,11 +85,12 @@ function draw() {
   background("#48cfd9");
   Player1.draw();
   Ball.draw();
-  Brick1.draw();
-  Brick2.draw();
-  Brick3.draw();
-  Brick4.draw();
-  Brick5.draw();
+
+  bricks.forEach(brick => {
+    brick.draw();
+    brick.hit();
+  });
+  
 
   //speler 1
   if (keyIsDown(37)) {
@@ -93,7 +100,8 @@ function draw() {
   if (keyIsDown(39)) {
     player.x = player.x + 5
   }
-  
+
+  //Speler collision zodat hij niet door de muur heen gaat
   if (player.x < 0){
     player.x = 0;
   }

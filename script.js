@@ -6,17 +6,24 @@ var bricks = [];
 //Classes!!!
 class player {
   constructor(x, y, w, h, c, r) {
-    player.x = x;
-    player.y = y;
+    this.x = x;
+    this.y = y;
     this.width = w;
     this.height = h;
     this.color = c;
     this.radius = r;
   }
+    
   draw() {
     fill(this.color);
-    rect(player.x, player.y, this.width, this.height, this.radius);
+    rect(this.x, this.y, this.width, this.height, this.radius);
   }
+
+  collision(){
+      if((Ball.x + 25 > this.x && Ball.x < this.x + this.width) && (Ball.y + 25 > this.y && Ball.y < this.y + this.height)){
+        Ball.vy = Ball.vy * -1;
+        }
+    }
 }
 
 class ball {
@@ -59,12 +66,11 @@ class brick {
   }
 
   hit(){
-    if(Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20){
-        background("black")
+    if(Ball.x + 25 > brick.x && Ball.x < brick.x + 70 && Ball.y + 25 > brick.y && Ball.y < brick.y + 20){
+        Ball.vy = Ball.vy * -1;
         }
     }
 }
-    
 
 //Functions!!
 function setup() {
@@ -82,6 +88,7 @@ function setup() {
 function draw() {
   background("#48cfd9");
   Player1.draw();
+  Player1.collision();
   Ball.draw();
 
   bricks.forEach(brick => {

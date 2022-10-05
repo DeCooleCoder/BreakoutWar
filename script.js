@@ -66,7 +66,7 @@ class brick {
   }
 
   hit(){
-    if(Ball.x + 25 > brick.x && Ball.x < brick.x + 70 && Ball.y + 25 > brick.y && Ball.y < brick.y + 20){
+    if(Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20){
         Ball.vy = Ball.vy * -1;
         }
     }

@@ -99,19 +99,19 @@ function draw() {
 
   //speler 1
   if (keyIsDown(37)) {
-    player.x = player.x - 5
+    Player1.x = Player1.x - 5
   }
 
   if (keyIsDown(39)) {
-    player.x = player.x + 5
+    Player1.x = Player1.x + 5
   }
 
   //Speler collision zodat hij niet door de muur heen gaat
-  if (player.x < 0){
-    player.x = 0;
+  if (Player1.x < 0){
+    Player1.x = 0;
   }
-  if (player.x > 500){
-    player.x = 500;
+  if (Player1.x > 500){
+    Player1.x = 500;
   }
 }
 

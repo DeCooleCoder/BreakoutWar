@@ -77,12 +77,12 @@ class brick {
 //Functions!!
 function setup() {
   createCanvas(600, 500);
-  Player1 = new player(250, 400, 100, 30, "lime", 10);
-  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson");
+  Player1 = new player(250, 470, 100, 10, "white", 5);
+  Ball = new ball(300, 200, 25, 25, 5, 5, "white");
 
    for(let r = 0; r< 3;r++){
-      for(let i = 0; i< 6;i++){
-        bricks.push(new brick((i * 70) + (i * 10), (r + 1) * 50, "green"));
+      for(let i = 1; i< 7;i++){
+        bricks.push(new brick((i * 65) + (i * 10), (r + 1) * 30, "#04de37"));
       }
    }
 }
@@ -105,11 +105,11 @@ function draw() {
 
   //speler 1 movement
   if (keyIsDown(37)) {
-    Player1.x = Player1.x - 5
+    Player1.x = Player1.x - 10
   }
 
   if (keyIsDown(39)) {
-    Player1.x = Player1.x + 5
+    Player1.x = Player1.x + 10
   }
 
   //Speler collision zodat hij niet door de muur heen gaat

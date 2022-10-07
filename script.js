@@ -2,6 +2,7 @@
 var Player1;
 var Ball;
 var bricks = [];
+let gameState = 0
 
 //Classes!!!
 class player {
@@ -78,7 +79,7 @@ class brick {
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
-  Ball = new ball(300, 200, 25, 25, 5, 5, "white");
+  Ball = new ball(300, 200, 20, 20, 5, 5, "white");
 
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){
@@ -88,6 +89,26 @@ function setup() {
 }
 
 function draw() {
+  if(gameState == 0){
+    startGame();
+  } else if(gameState == 1){
+    playGame();
+  }else if(gameState == 2){
+    finishGame();
+ }
+}
+
+function startGame(){
+  background(0,255,0);
+  textAlign(CENTER);
+  textSize(20);
+  text("PRESS ENTER TO START GAME", width/2,height/2);
+
+  // put your code here
+}
+
+function playGame(){
+  {
   background("#48cfd9");
   Player1.draw();
   Player1.collision();
@@ -99,29 +120,45 @@ function draw() {
   });
 
   if(bricks.length == 0){
-    console.log("WIN!");
+    gameState = 2
   }
-
-
-  //speler 1 movement
+    //speler 1 movement
   if (keyIsDown(37)) {
-    Player1.x = Player1.x - 10
+    player.x = player.x - 10
   }
 
   if (keyIsDown(39)) {
-    Player1.x = Player1.x + 10
+    player.x = player.x + 10
   }
 
   //Speler collision zodat hij niet door de muur heen gaat
-  if (Player1.x < 0) {
-    Player1.x = 0;
+  if (player.x < 0) {
+    player.x = 0;
   }
-  if (Player1.x > 500) {
-    Player1.x = 500;
+  if (player.x > 500) {
+    player.x = 500;
   }
+ }
 }
 
+function finishGame(){
+  if(bricks.length == 0){
+     background("lime");
+     textAlign(CENTER);
+     textSize(20);
+     text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)}
+   else {background(255,0,0);
+     textAlign(CENTER);
+      textSize(20);
+      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);}
+  }
 
+
+function keyPressed(){
+  if (keyCode === ENTER){
+    gameState = 1
+  }
+}
 // handige shortcuts!!!
 // ctlr + / shorcut voor een comment
 // ctlr + alt ingedrukt houden om meerdere dingen tegelijkertijd te kunnen editten

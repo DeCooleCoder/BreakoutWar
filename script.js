@@ -13,17 +13,17 @@ class player {
     this.color = c;
     this.radius = r;
   }
-    
+
   draw() {
     fill(this.color);
     rect(this.x, this.y, this.width, this.height, this.radius);
   }
 
-  collision(){
-      if((Ball.x + 25 > this.x && Ball.x < this.x + this.width) && (Ball.y + 25 > this.y && Ball.y < this.y + this.height)){
-        Ball.vy = Ball.vy * -1;
-        }
+  collision() {
+    if ((Ball.x + 15 > this.x && Ball.x < this.x + this.width) && (Ball.y + 15 > this.y && Ball.y < this.y + this.height)) {
+      Ball.vy = Ball.vy * -1;
     }
+  }
 }
 
 class ball {
@@ -60,31 +60,31 @@ class brick {
     this.color = c;
   }
 
-  draw(){
+  draw() {
     fill(this.color)
     rect(this.x, this.y, 70, 20, 5)
   }
 
-  hit(){
-    if(Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20){
-        Ball.vy = Ball.vy * -1;
-        bricks.splice(brick,1)
-        }
+  hit() {
+    if (Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20) {
+      Ball.vy = Ball.vy * -1;
+      let idx = bricks.indexOf(this);
+      bricks.splice(idx,1)
     }
+  }
 }
 
 //Functions!!
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 400, 100, 30, "lime", 10);
-  Ball = new ball(300, 200, 25, 25, 0, 5, "crimson");
+  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson");
 
-  for (i = 2; i < 7; i++){
-    bricks[i] = [];
-    for (j = 0; j < 6; j++){
-      bricks[i][j] = new brick(i * 70, j * 20, "green")
+   for(let r = 0; r< 3;r++){
+      for(let i = 0; i< 6;i++){
+        bricks.push(new brick((i * 70) + (i * 10), (r + 1) * 50, "green"));
       }
-  }
+   }
 }
 
 function draw() {
@@ -93,13 +93,17 @@ function draw() {
   Player1.collision();
   Ball.draw();
 
-  for(i = 2; i < 7; i++){
-      for (j = 0; j < bricks[i].length; j++){
-           bricks[i][j].draw();
-      }
+  bricks.forEach(brick => {
+    brick.draw();
+    brick.hit();
+  });
+
+  if(bricks.length == 0){
+    console.log("WIN!");
   }
 
-  //speler 1
+
+  //speler 1 movement
   if (keyIsDown(37)) {
     Player1.x = Player1.x - 5
   }
@@ -109,10 +113,10 @@ function draw() {
   }
 
   //Speler collision zodat hij niet door de muur heen gaat
-  if (Player1.x < 0){
+  if (Player1.x < 0) {
     Player1.x = 0;
   }
-  if (Player1.x > 500){
+  if (Player1.x > 500) {
     Player1.x = 500;
   }
 }

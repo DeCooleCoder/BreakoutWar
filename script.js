@@ -68,6 +68,7 @@ class brick {
   hit(){
     if(Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20){
         Ball.vy = Ball.vy * -1;
+        bricks.splice(brick,1)
         }
     }
 }
@@ -76,13 +77,14 @@ class brick {
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 400, 100, 30, "lime", 10);
-  Ball = new ball(300, 200, 25, 25, 5, 5, "crimson");
+  Ball = new ball(300, 200, 25, 25, 0, 5, "crimson");
 
-  bricks.push(new brick(130, 50, "green"));
-  bricks.push(new brick(200, 50, "green"));
-  bricks.push(new brick(270, 50, "green"));
-  bricks.push(new brick(340, 50, "green"));
-  bricks.push(new brick(410, 50, "green"));
+  for (i = 2; i < 7; i++){
+    bricks[i] = [];
+    for (j = 0; j < 6; j++){
+      bricks[i][j] = new brick(i * 70, j * 20, "green")
+      }
+  }
 }
 
 function draw() {
@@ -91,11 +93,11 @@ function draw() {
   Player1.collision();
   Ball.draw();
 
-  bricks.forEach(brick => {
-    brick.draw();
-    brick.hit();
-  });
-  
+  for(i = 2; i < 7; i++){
+      for (j = 0; j < bricks[i].length; j++){
+           bricks[i][j].draw();
+      }
+  }
 
   //speler 1
   if (keyIsDown(37)) {

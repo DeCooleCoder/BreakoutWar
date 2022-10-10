@@ -4,7 +4,6 @@ var Ball;
 var bricks = [];
 let gameState = 0
 
-
 //Classes!!!
 class player {
   constructor(x, y, w, h, c, r) {
@@ -19,6 +18,23 @@ class player {
   draw() {
     fill(this.color);
     rect(this.x, this.y, this.width, this.height, this.radius);
+      
+    //speler 1 movement
+    if (keyIsDown(37)) {
+      this.x = this.x - 10
+    }
+
+    if (keyIsDown(39)) {
+      this.x = this.x + 10
+    }
+
+    //Speler collision zodat hij niet door de muur heen gaat
+    if (this.x < 0) {
+      this.x = 0;
+    }
+    if (this.x > 500) {
+     this.x = 500;
+    }
   }
 
   collision() {
@@ -77,16 +93,11 @@ class brick {
 }
 
 //Functions!!
-// function preload() {
-//   fontSans = loadFont('assets/open-sans.regular.ttf');
-// }
-
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
   Ball = new ball(300, 200, 20, 20, 5, 5, "white");
 
-  //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){
         bricks.push(new brick((i * 65) + (i * 10), (r + 1) * 30, "#04de37"));
@@ -106,10 +117,11 @@ function draw() {
 
 function startGame(){
   background(0,255,0);
-  textFont(fontBold);
   textAlign(CENTER);
   textSize(20);
   text("PRESS ENTER TO START GAME", width/2,height/2);
+
+  // put your code here
 }
 
 function playGame(){
@@ -127,29 +139,12 @@ function playGame(){
   if(bricks.length == 0){
     gameState = 2
   }
-    //speler 1 movement werkt nu ff niet??
-  if (keyIsDown(37)) {
-    player.x = player.x - 10
-  }
-
-  if (keyIsDown(39)) {
-    player.x = player.x + 10
-  }
-
-  //Speler collision zodat hij niet door de muur heen gaat
-  if (player.x < 0) {
-    player.x = 0;
-  }
-  if (player.x > 500) {
-    player.x = 500;
-  }
  }
 }
 
-//Speelt nu niet opnieuw omdat er geen bricks meer zijn om weer mee te spelen het aantal bricks blijft 0 dus moet een manier verzinnen om die bricks te resetten en moet een manier bedenken om weer de player te kunnen bewegen!! (daarom zie je ook die flits als je op ENTER drukt)
 function finishGame(){
   if(bricks.length == 0){
-     background("#1511d9");
+     background("lime");
      textAlign(CENTER);
      textSize(20);
      text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)}
@@ -159,15 +154,12 @@ function finishGame(){
       text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);}
   }
 
-//waarom werkt: If (KeyIsDown(13) && gameState = 1 niet??? want dan kunnen we ook zeggen:
-//If (KeyIsDown(13) && gameState = 0) dan gat ie door naar 1 en asl de GameState 2 is dan resetten de bricks zich ofzo?
+
 function keyPressed(){
-  if (keyIsDown(13)) {
+  if (keyCode === ENTER){
     gameState = 1
   }
 }
-
-
 // handige shortcuts!!!
 // ctlr + / shorcut voor een comment
 // ctlr + alt ingedrukt houden om meerdere dingen tegelijkertijd te kunnen editten

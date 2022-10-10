@@ -84,7 +84,7 @@ class brick {
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
-  Ball = new ball(300, 200, 20, 20, 5, 5, "white");
+  Ball = new ball(300, 200, 20, 20, 20, 20, "white");
 
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
@@ -92,16 +92,6 @@ function setup() {
         bricks.push(new brick((i * 65) + (i * 10), (r + 1) * 30, "#04de37"));
       }
    }
-}
-
-function draw() {
-  if(gameState == 0){
-    startGame();
-  } else if(gameState == 1){
-    playGame();
-  }else if(gameState == 2){
-    finishGame();
- }
 }
 
 function startGame(){
@@ -126,7 +116,7 @@ function playGame(){
   if(bricks.length == 0){
     gameState = 2
   }
-    //speler 1 movement werkt nu ff niet??
+    
   if (keyIsDown(37)) {
     player.x = player.x - 10
   }
@@ -155,15 +145,30 @@ function finishGame(){
    else {background(255,0,0);
      textAlign(CENTER);
       textSize(20);
-      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);}
+      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+        if (keyIsDown(13)){
+          gameState = 1
+        }
+      }
   }
 
-//waarom werkt: If (KeyIsDown(13) && gameState = 1 niet??? want dan kunnen we ook zeggen:
-//If (KeyIsDown(13) && gameState = 0) dan gat ie door naar 1 en asl de GameState 2 is dan resetten de bricks zich ofzo?
 function keyPressed(){
-  if (keyIsDown(13)) {
+   if (keyIsDown(13) && gameState == 2){
+   setup()
+ }
+  else if (keyIsDown(13)) {
     gameState = 1
   }
+}  
+
+function draw() {
+  if(gameState == 0){
+    startGame();
+  } else if(gameState == 1){
+    playGame();
+  }else if(gameState == 2){
+    finishGame();
+ }
 }
 
 

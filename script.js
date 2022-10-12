@@ -157,13 +157,10 @@ function finishGame(){
 }
 
 function keyPressed(){
-   if (keyIsDown(13) && gameState == 2){
-   setup()
- }
-  else if (keyIsDown(13)) {
+if(keyIsDown(13)) {
     gameState = 1
   }
-}  
+}
 
 function GameOver(){
   bricks.splice(0, bricks.length)

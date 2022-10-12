@@ -150,6 +150,7 @@ function finishGame(){
      textSize(20);
      text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)
   if (keyIsDown(13)){
+          setup()
           gameState = 1
         }
   }
@@ -171,6 +172,7 @@ function GameOver(){
       textSize(20);
       text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
         if (keyIsDown(13)){
+          setup()
           gameState = 1
         }
       }

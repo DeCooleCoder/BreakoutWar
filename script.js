@@ -31,7 +31,7 @@ class player {
 class ball {
   constructor(x, y, w, h, vx, vy, c) {
     this.x = x;
-    this.y = y;
+    ball.y = y;
     this.width = w;
     this.height = h;
     this.vx = vx;
@@ -41,15 +41,15 @@ class ball {
 
   draw() {
     fill(this.color);
-    ellipse(this.x, this.y, this.width, this.height);
+    ellipse(this.x, ball.y, this.width, this.height);
     this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
+    ball.y = ball.y + this.vy;
 
     //velocity code
     if (this.x < 10 || this.x > width) {
       this.vx = this.vx * -1;
     }
-    if (this.y < 10 || this.y > height) {
+    if (ball.y < 10 || ball.y > height) {
       this.vy = this.vy * -1;
     }
   }
@@ -68,7 +68,7 @@ class brick {
   }
 
   hit() {
-    if (Ball.x + 25 > this.x && Ball.x < this.x + 70 && Ball.y + 25 > this.y && Ball.y < this.y + 20) {
+    if (Ball.x + 25 > this.x && Ball.x < this.x + 70 && ball.y + 25 > this.y && ball.y < this.y + 20) {
       Ball.vy = Ball.vy * -1;
       let idx = bricks.indexOf(this);
       bricks.splice(idx,1)
@@ -84,7 +84,7 @@ class brick {
 function setup() {
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
-  Ball = new ball(300, 200, 20, 20, 20, 20, "white");
+  Ball = new ball(300, 200, 20, 20, 5, 5, "white");
 
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
@@ -132,6 +132,19 @@ function playGame(){
   if (player.x > 500) {
     player.x = 500;
   }
+
+    //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)
+    if (ball.y > 499){
+      bricks.splice((18, bricks.length))
+      {background(255,0,0);
+     textAlign(CENTER);
+      textSize(20);
+      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+        if (keyIsDown(13)){
+          gameState = 1
+        }
+      }
+  }
  }
 }
 
@@ -141,8 +154,13 @@ function finishGame(){
      background("#1511d9");
      textAlign(CENTER);
      textSize(20);
-     text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)}
-   else {background(255,0,0);
+     text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)
+  if (keyIsDown(13)){
+          gameState = 1
+        }
+  }
+  else {
+    {background(255,0,0);
      textAlign(CENTER);
       textSize(20);
       text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
@@ -151,6 +169,7 @@ function finishGame(){
         }
       }
   }
+}
 
 function keyPressed(){
    if (keyIsDown(13) && gameState == 2){

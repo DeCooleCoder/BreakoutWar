@@ -135,19 +135,13 @@ function playGame(){
 
     //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)
     if (ball.y > 499){
-      bricks.splice(0, bricks.length)
-      {background(255,0,0);
-     textAlign(CENTER);
-      textSize(20);
-      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+     gameState = 3
         if (keyIsDown(13)){
           gameState = 1
         }
       }
   }
- }
 }
-
 //Speelt nu niet opnieuw omdat er geen bricks meer zijn om weer mee te spelen het aantal bricks blijft 0 dus moet een manier verzinnen om die bricks te resetten en moet een manier bedenken om weer de player te kunnen bewegen!! (daarom zie je ook die flits als je op ENTER drukt)
 function finishGame(){
   if(bricks.length == 0){
@@ -158,16 +152,6 @@ function finishGame(){
   if (keyIsDown(13)){
           gameState = 1
         }
-  }
-  else {
-    {background(255,0,0);
-     textAlign(CENTER);
-      textSize(20);
-      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
-        if (keyIsDown(13)){
-          gameState = 1
-        }
-      }
   }
 }
 
@@ -180,6 +164,18 @@ function keyPressed(){
   }
 }  
 
+function GameOver(){
+  bricks.splice(0, bricks.length)
+    {background(255,0,0);
+     textAlign(CENTER);
+      textSize(20);
+      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+        if (keyIsDown(13)){
+          gameState = 1
+        }
+      }
+  }
+
 function draw() {
   if(gameState == 0){
     startGame();
@@ -187,6 +183,8 @@ function draw() {
     playGame();
   }else if(gameState == 2){
     finishGame();
+ }else if(gameState == 3){
+   GameOver();
  }
 }
 

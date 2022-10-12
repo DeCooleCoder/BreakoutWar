@@ -22,7 +22,7 @@ class player {
   }
 
   collision() {
-    if ((Ball.x + 15 > player.x && Ball.x < player.x + this.width) && (Ball.y + 15 > this.y && Ball.y < this.y + this.height)) {
+    if ((Ball.x + 15 > player.x && Ball.x < player.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
       Ball.vy = Ball.vy * -1;
     }
   }

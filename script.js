@@ -6,8 +6,8 @@ let gameState = 0
 
 
 //Classes!!!
-class player {
-  constructor(x, y, w, h, c, r) {
+class player{
+  constructor(x, y, w, h, c, r){
     player.x = x;
     this.y = y;
     this.width = w;
@@ -16,20 +16,20 @@ class player {
     this.radius = r;
   }
 
-  draw() {
+  draw(){
     fill(this.color);
     rect(player.x, this.y, this.width, this.height, this.radius);
   }
 
-  collision() {
+  collision(){
     if ((Ball.x + 15 > player.x && Ball.x < player.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
       Ball.vy = Ball.vy * -1;
     }
   }
 }
 
-class ball {
-  constructor(x, y, w, h, vx, vy, c) {
+class ball{
+  constructor(x, y, w, h, vx, vy, c){
     this.x = x;
     ball.y = y;
     this.width = w;
@@ -39,35 +39,35 @@ class ball {
     this.color = c;
   }
 
-  draw() {
+  draw(){
     fill(this.color);
     ellipse(this.x, ball.y, this.width, this.height);
     this.x = this.x + this.vx;
     ball.y = ball.y + this.vy;
 
     //velocity code
-    if (this.x < 10 || this.x > width) {
+    if (this.x < 10 || this.x > width){
       this.vx = this.vx * -1;
     }
-    if (ball.y < 10 || ball.y > height) {
+    if (ball.y < 10 || ball.y > height){
       this.vy = this.vy * -1;
     }
   }
 }
 
-class brick {
-  constructor(x, y, c) {
+class brick{
+  constructor(x, y, c){
     this.x = x;
     this.y = y;
     this.color = c;
   }
 
-  draw() {
+  draw(){
     fill(this.color)
     rect(this.x, this.y, 70, 20, 5)
   }
 
-  hit() {
+  hit(){
     if (Ball.x + 25 > this.x && Ball.x < this.x + 70 && ball.y + 25 > this.y && ball.y < this.y + 20) {
       Ball.vy = Ball.vy * -1;
       let idx = bricks.indexOf(this);
@@ -81,7 +81,7 @@ class brick {
 //   fontSans = loadFont('assets/open-sans.regular.ttf');
 // }
 
-function setup() {
+function setup(){
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
   Ball = new ball(300, 200, 20, 20, 5, 5, "white");
@@ -102,7 +102,6 @@ function startGame(){
 }
 
 function playGame(){
-  {
   background("#48cfd9");
   Player1.draw();
   Player1.collision();
@@ -117,31 +116,31 @@ function playGame(){
     gameState = 2
   }
     
-  if (keyIsDown(37)) {
+  if (keyIsDown(37)){
     player.x = player.x - 10
   }
 
-  if (keyIsDown(39)) {
+  if (keyIsDown(39)){
     player.x = player.x + 10
   }
 
   //Speler collision zodat hij niet door de muur heen gaat
-  if (player.x < 0) {
+  if (player.x < 0){
     player.x = 0;
   }
-  if (player.x > 500) {
+  if (player.x > 500){
     player.x = 500;
   }
 
     //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)
-    if (ball.y > 499){
-     gameState = 3
-        if (keyIsDown(13)){
-          gameState = 1
-        }
-      }
+  if (ball.y > 499){
+    gameState = 3
+    if (keyIsDown(13)){
+        gameState = 1
+    }
   }
 }
+
 //Speelt nu niet opnieuw omdat er geen bricks meer zijn om weer mee te spelen het aantal bricks blijft 0 dus moet een manier verzinnen om die bricks te resetten en moet een manier bedenken om weer de player te kunnen bewegen!! (daarom zie je ook die flits als je op ENTER drukt)
 function finishGame(){
   if(bricks.length == 0){
@@ -164,27 +163,30 @@ if(keyIsDown(13)) {
 
 function GameOver(){
   bricks.splice(0, bricks.length)
-    {background(255,0,0);
-     textAlign(CENTER);
-      textSize(20);
-      text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
-        if (keyIsDown(13)){
-          setup()
-          gameState = 1
-        }
-      }
-  }
+    background(255,0,0);
+    textAlign(CENTER);
+    textSize(20);
+    text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+    if (keyIsDown(13)){
+        setup()
+        gameState = 1
+    }
+}
+
 
 function draw() {
   if(gameState == 0){
     startGame();
-  } else if(gameState == 1){
+  } 
+  else if(gameState == 1){
     playGame();
-  }else if(gameState == 2){
+  }
+  else if(gameState == 2){
     finishGame();
- }else if(gameState == 3){
+  }
+  else if(gameState == 3){
    GameOver();
- }
+  }
 }
 
 

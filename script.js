@@ -1,7 +1,7 @@
 //Variablen!!
 var Player1;
 var Ball;
-var bricks = [];
+let bricks = [];
 let gameState = 0
 
 
@@ -135,7 +135,7 @@ function playGame(){
 
     //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)
     if (ball.y > 499){
-      bricks.splice((18, bricks.length))
+      bricks.splice(0, bricks.length)
       {background(255,0,0);
      textAlign(CENTER);
       textSize(20);

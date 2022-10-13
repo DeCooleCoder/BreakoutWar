@@ -23,6 +23,7 @@ class player{
 
   collision(){
     if ((Ball.x + 15 > player.x && Ball.x < player.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
+      // Ball.vx = ((player.x + 150 - Ball.x)/8)
       Ball.vy = Ball.vy * -1;
     }
   }
@@ -159,6 +160,9 @@ function keyPressed(){
 if(keyIsDown(13)) {
     gameState = 1
   }
+if(keyIsDown(8)){
+    gameState = 0
+}
 }
 
 function GameOver(){

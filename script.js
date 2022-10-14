@@ -4,6 +4,8 @@ var Ball;
 let bricks = [];
 let gameState = 0
 let startbg;
+let startmusic;
+let brickhit;
 
 //Classes!!!
 class player{
@@ -73,6 +75,7 @@ class brick{
       Ball.vy = Ball.vy * -1;
       let idx = bricks.indexOf(this);
       bricks.splice(idx,1)
+        brickhit.play();
     }
   }
 }
@@ -86,7 +89,9 @@ function setup(){
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
   Ball = new ball(300, 200, 20, 20, 5, 5, "white");
-  startbg = loadImage('assets/startbg.gif');
+  startbg = loadImage('Backgrounds/startbg.gif');
+  startmusic = loadSound('Sounds/level-start.mp3');
+  brickhit = loadSound('Sounds/jump-3.mp3')
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){

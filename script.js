@@ -1,11 +1,13 @@
 //Variablen!!
-var Player1;
+var player1;
 var Ball;
 let bricks = [];
 let gameState = 0
 let startbg;
+let Gameoverbg;
 let startmusic;
 let brickhit;
+let youwin;
 
 //Classes!!!
 class Player{
@@ -112,6 +114,8 @@ function setup(){
   startbg = loadImage('Backgrounds/startbg.gif');
   startmusic = loadSound('Sounds/level-start.mp3');
   brickhit = loadSound('Sounds/jump-3.mp3')
+  Gameoverbg =  loadImage('Backgrounds/Gameoverbg.gif')
+  youwin = loadImage('Backgrounds/youwin.gif')
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){
@@ -174,7 +178,9 @@ function finishGame(){
      background("#1511d9");
      textAlign(CENTER);
      textSize(20);
+     background(youwin)
      text("AMAZING JOB!!!\nPRESS ENTER TO PLAY AGAIN", width/2,height/2)
+     fill("white")
   if (keyIsDown(13)){
           setup()
           gameState = 1
@@ -197,7 +203,9 @@ function GameOver(){
     background(255,0,0);
     textAlign(CENTER);
     textSize(20);
-    text("GAME OVER\nPRESS ENTER TO PLAY AGAIN", width/2,height/2);
+    background(Gameoverbg)
+    text("\nPRESS ENTER TO PLAY AGAIN", width/2,height/2.55);
+    fill("white")
     if (keyIsDown(13)){
         setup()
         gameState = 1

@@ -7,6 +7,8 @@ let gameState = 0
 let startbg;
 let Gameoverbg;
 let startmusic;
+let gameovermusic;
+let winmusic;
 let brickhit;
 let youwin;
 
@@ -109,6 +111,8 @@ function setup(){
   ball = new Ball(300, 200, 20, 20, 5, 5, "white");
   startbg = loadImage('Backgrounds/startbg.gif');
   startmusic = loadSound('Sounds/level-start.mp3');
+  gameovermusic = loadSound('Sounds/gameovermusic.mp3')
+  winmusic = loadSound('Sounds/win.mp3')
   brickhit = loadSound('Sounds/jump-3.mp3')
   Gameoverbg =  loadImage('Backgrounds/Gameoverbg.gif')
   youwin = loadImage('Backgrounds/youwin.gif')
@@ -171,6 +175,7 @@ function playGame(){
     if (keyIsDown(13)){
         gameState = 1
     }
+        gameovermusic.play();
   }
 }
 

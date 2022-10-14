@@ -3,7 +3,7 @@ var Player1;
 var Ball;
 let bricks = [];
 let gameState = 0
-
+let startbg;
 
 //Classes!!!
 class player{
@@ -86,7 +86,7 @@ function setup(){
   createCanvas(600, 500);
   Player1 = new player(250, 470, 100, 10, "white", 5);
   Ball = new ball(300, 200, 20, 20, 5, 5, "white");
-
+  startbg = loadImage('assets/startbg.gif');
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){
@@ -96,10 +96,11 @@ function setup(){
 }
 
 function startGame(){
-  background(0,255,0);
+  background(startbg);
   textAlign(CENTER);
   textSize(20);
-  text("PRESS ENTER TO START GAME", width/2,height/2);
+  text("PRESS ENTER \n TO START GAME", width/2,height/2);
+  fill("white")
 }
 
 function playGame(){

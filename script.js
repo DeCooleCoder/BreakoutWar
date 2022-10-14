@@ -161,6 +161,7 @@ if(keyIsDown(13)) {
     gameState = 1
   }
 if(keyIsDown(8)){
+  setup()
     gameState = 0
 }
 }

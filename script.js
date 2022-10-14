@@ -8,9 +8,9 @@ let startmusic;
 let brickhit;
 
 //Classes!!!
-class player{
+class Player{
   constructor(x, y, w, h, c, r){
-    player.x = x;
+    this.x = x;
     this.y = y;
     this.width = w;
     this.height = h;
@@ -20,13 +20,33 @@ class player{
 
   draw(){
     fill(this.color);
-    rect(player.x, this.y, this.width, this.height, this.radius);
+    rect(this.x, this.y, this.width, this.height, this.radius);
   }
 
   collision(){
-    if ((Ball.x + 15 > player.x && Ball.x < player.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
+    if ((Ball.x + 15 > this.x && Ball.x < this.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
       // Ball.vx = ((player.x + 150 - Ball.x)/8)
       Ball.vy = Ball.vy * -1;
+      let paddleMiddle = this.x + (this.width / 2);
+      if(Ball.x < paddleMiddle){
+        console.log("naar links");
+        if(Ball.vx > 0){
+          Ball.vx *= -1;
+        }
+      }
+      //   else if(ball.x = paddleMiddle){
+      // console.log("middle")
+      //     if(Ball.vx = 0){
+      //     Ball.vx = 0.1;
+      //     Ball.vy *= -1;
+      //   }
+      // }
+      else{
+        console.log("naar rechts");
+            if(Ball.vx < 0){
+          Ball.vx *= -1;
+        }
+      }
     }
   }
 }
@@ -87,7 +107,7 @@ class brick{
 
 function setup(){
   createCanvas(600, 500);
-  Player1 = new player(250, 470, 100, 10, "white", 5);
+  player1 = new Player(250, 470, 100, 10, "white", 5);
   Ball = new ball(300, 200, 20, 20, 5, 5, "white");
   startbg = loadImage('Backgrounds/startbg.gif');
   startmusic = loadSound('Sounds/level-start.mp3');
@@ -110,8 +130,8 @@ function startGame(){
 
 function playGame(){
   background("#48cfd9");
-  Player1.draw();
-  Player1.collision();
+  player1.draw();
+  player1.collision();
   Ball.draw();
 
   bricks.forEach(brick => {
@@ -124,19 +144,19 @@ function playGame(){
   }
     
   if (keyIsDown(37)){
-    player.x = player.x - 10
+    player1.x = player1.x - 10
   }
 
   if (keyIsDown(39)){
-    player.x = player.x + 10
+    player1.x = player1.x + 10
   }
 
   //Speler collision zodat hij niet door de muur heen gaat
-  if (player.x < 0){
-    player.x = 0;
+  if (player1.x < 0){
+    player1.x = 0;
   }
-  if (player.x > 500){
-    player.x = 500;
+  if (player1.x > 500){
+    player1.x = 500;
   }
 
     //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)

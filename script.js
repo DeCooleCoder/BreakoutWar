@@ -1,6 +1,7 @@
 //Variablen!!
 var player1;
-var Ball;
+var ball;
+var score = 0;
 let bricks = [];
 let gameState = 0
 let startbg;
@@ -26,37 +27,37 @@ class Player{
   }
 
   collision(){
-    if ((Ball.x + 15 > this.x && Ball.x < this.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
-      // Ball.vx = ((player.x + 150 - Ball.x)/8)
-      Ball.vy = Ball.vy * -1;
+    if ((ball.x + 15 > this.x && ball.x < this.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
+      // ball.vx = ((player.x + 150 - ball.x)/8)
+      ball.vy = ball.vy * -1;
       let paddleMiddle = this.x + (this.width / 2);
-      if(Ball.x < paddleMiddle){
+      if(ball.x < paddleMiddle){
         console.log("naar links");
-        if(Ball.vx > 0){
-          Ball.vx *= -1;
+        if(ball.vx > 0){
+          ball.vx *= -1;
         }
       }
       //   else if(ball.x = paddleMiddle){
       // console.log("middle")
-      //     if(Ball.vx = 0){
-      //     Ball.vx = 0.1;
-      //     Ball.vy *= -1;
+      //     if(ball.vx = 0){
+      //     ball.vx = 0.1;
+      //     ball.vy *= -1;
       //   }
       // }
       else{
         console.log("naar rechts");
-            if(Ball.vx < 0){
-          Ball.vx *= -1;
+            if(ball.vx < 0){
+          ball.vx *= -1;
         }
       }
     }
   }
 }
 
-class ball{
+class Ball{
   constructor(x, y, w, h, vx, vy, c){
     this.x = x;
-    ball.y = y;
+    this.y = y;
     this.width = w;
     this.height = h;
     this.vx = vx;
@@ -66,15 +67,15 @@ class ball{
 
   draw(){
     fill(this.color);
-    ellipse(this.x, ball.y, this.width, this.height);
+    ellipse(this.x, this.y, this.width, this.height);
     this.x = this.x + this.vx;
-    ball.y = ball.y + this.vy;
+    this.y = this.y + this.vy;
 
     //velocity code
     if (this.x < 10 || this.x > width){
       this.vx = this.vx * -1;
     }
-    if (ball.y < 10 || ball.y > height){
+    if (this.y < 10 || this.y > height){
       this.vy = this.vy * -1;
     }
   }
@@ -93,11 +94,12 @@ class brick{
   }
 
   hit(){
-    if (Ball.x + 25 > this.x && Ball.x < this.x + 70 && ball.y + 25 > this.y && ball.y < this.y + 20) {
-      Ball.vy = Ball.vy * -1;
+    if (ball.x + 25 > this.x && ball.x < this.x + 70 && ball.y + 25 > this.y && ball.y < this.y + 20) {
+      ball.vy = ball.vy * -1;
       let idx = bricks.indexOf(this);
       bricks.splice(idx,1)
-        brickhit.play();
+      brickhit.play();
+      score += 1
     }
   }
 }
@@ -110,7 +112,7 @@ class brick{
 function setup(){
   createCanvas(600, 500);
   player1 = new Player(250, 470, 100, 10, "white", 5);
-  Ball = new ball(300, 200, 20, 20, 5, 5, "white");
+  ball = new Ball(300, 200, 20, 20, 5, 5, "white");
   startbg = loadImage('Backgrounds/startbg.gif');
   startmusic = loadSound('Sounds/level-start.mp3');
   brickhit = loadSound('Sounds/jump-3.mp3')
@@ -136,13 +138,17 @@ function playGame(){
   background("#48cfd9");
   player1.draw();
   player1.collision();
-  Ball.draw();
+  ball.draw();
 
   bricks.forEach(brick => {
     brick.draw();
     brick.hit();
   });
-
+  textSize(20);
+  fill("white")
+  text("Score: " + score, 50, 25)
+    
+    
   if(bricks.length == 0){
     gameState = 2
   }

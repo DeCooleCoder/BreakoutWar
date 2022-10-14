@@ -112,6 +112,7 @@ function setup(){
   brickhit = loadSound('Sounds/jump-3.mp3')
   Gameoverbg =  loadImage('Backgrounds/Gameoverbg.gif')
   youwin = loadImage('Backgrounds/youwin.gif')
+  score = 0
   //loopje voor de bricks!
    for(let r = 0; r< 3;r++){
       for(let i = 1; i< 7;i++){
@@ -120,6 +121,7 @@ function setup(){
    }
 }
 
+//Functions!!
 function startGame(){
   background(startbg);
   textAlign(CENTER);

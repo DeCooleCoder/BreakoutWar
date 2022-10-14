@@ -28,7 +28,6 @@ class Player{
 
   collision(){
     if ((ball.x + 15 > this.x && ball.x < this.x + this.width) && (ball.y + 15 > this.y && ball.y < this.y + this.height)) {
-      // ball.vx = ((player.x + 150 - ball.x)/8)
       ball.vy = ball.vy * -1;
       let paddleMiddle = this.x + (this.width / 2);
       if(ball.x < paddleMiddle){
@@ -104,11 +103,6 @@ class brick{
   }
 }
 
-//Functions!!
-// function preload() {
-//   fontSans = loadFont('assets/open-sans.regular.ttf');
-// }
-
 function setup(){
   createCanvas(600, 500);
   player1 = new Player(250, 470, 100, 10, "white", 5);
@@ -169,7 +163,7 @@ function playGame(){
     player1.x = 500;
   }
 
-    //zorgt voor Game Over scherm (gebruik splice om uit array weg te halen misschien zodat alle blokjes verdwijnen.)
+    //zorgt voor Game Over scherm
   if (ball.y > 499){
     gameState = 3
     if (keyIsDown(13)){
@@ -178,7 +172,6 @@ function playGame(){
   }
 }
 
-//Speelt nu niet opnieuw omdat er geen bricks meer zijn om weer mee te spelen het aantal bricks blijft 0 dus moet een manier verzinnen om die bricks te resetten en moet een manier bedenken om weer de player te kunnen bewegen!! (daarom zie je ook die flits als je op ENTER drukt)
 function finishGame(){
   if(bricks.length == 0){
      background("#1511d9");
